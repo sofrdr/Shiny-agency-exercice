@@ -1,10 +1,33 @@
 import React from "react";
+import styled from "styled-components";
+import colors from "../../utils/style/color";
+import errorImg from "../../assets/404.svg";
+
+const ErrorContainer = styled.div`
+  background-color: ${colors.backgroundLight};
+  margin: 0 62px;
+  padding: 99px 220px 364px;
+`;
+
+const ErrorIllustration = styled.img`
+  text-align: center;
+`;
+
+const StyledText = styled.p`
+  text-align: center;
+  font-weight: 700;
+  font-size: 31px;
+  color: #2f2e41;
+  margin: 45px 0;
+`;
 
 const Error = () => {
   return (
-    <div>
-      <h1>Oups cette page n'existe pas !</h1>
-    </div>
+    <ErrorContainer>
+      <StyledText>Oups ...</StyledText>
+      <ErrorIllustration src={errorImg} alt="illustration-404" />
+      <StyledText>Il semblerait qu’il y ait un problème</StyledText>
+    </ErrorContainer>
   );
 };
 
