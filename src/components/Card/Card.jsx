@@ -5,27 +5,37 @@ import colors from "../../utils/style/color";
 
 /* STYLED COMPONENTS */
 
-const CardLabel = styled.span`
+const CardTitle = styled.span`
   color: #5843e4;
   font-size: 22px;
-  font-weight: bold;
+  padding-left: 15px;
 `;
 
 const CardImg = styled.img`
-  height: 80px;
-  width: 80px;
+  height: 148px;
+  width: 148px;
+  margin: auto;
   border-radius: 50%;
+`;
+
+const CardLabel = styled.span`
+  color: black;
+  font-size: 22px;
+  font-weight: normal;
+  align-self: center;
 `;
 
 const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-around;
   padding: 15px;
   background-color: ${colors.backgroundLight};
   border-radius: 30px;
-  width: 350px;
+  width: 334px;
+  height: 334px;
   transition: 200ms;
+  margin: auto;
   &:hover {
     cursor: pointer;
     box-shadow: 2px 2px 10px #e2e3e9;
@@ -37,9 +47,9 @@ const Card = (props) => {
 
   return (
     <CardWrapper>
-      <CardLabel>{label}</CardLabel>
+      <CardTitle>{title}</CardTitle>
       <CardImg src={picture} alt="freelance" />
-      <span>{title}</span>
+      <CardLabel>{label}</CardLabel>
     </CardWrapper>
   );
 };

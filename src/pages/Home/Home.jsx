@@ -6,7 +6,7 @@ import illustration from "../../assets/home-illustration.svg";
 
 const HomeContainer = styled.div`
   display: flex;
-  margin: 118px 62px 0 62px;
+  margin: 0 62px 0 62px;
   background-color: ${colors.backgroundLight};
 `;
 
