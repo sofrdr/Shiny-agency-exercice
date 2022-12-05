@@ -7,10 +7,13 @@ const ErrorContainer = styled.div`
   background-color: ${colors.backgroundLight};
   margin: 0 62px;
   padding: 99px 220px 364px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const ErrorIllustration = styled.img`
-  text-align: center;
+  margin: auto;
 `;
 
 const StyledText = styled.p`

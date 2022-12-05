@@ -26,7 +26,7 @@ const CardsContainer = styled.div`
   display: grid;
   gap: 52px;
   grid-template-rows: 334px 334px;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
   justify-items: center;
 `;
