@@ -1,26 +1,9 @@
-import React from "react";
+import { React, useEffect, useState } from "react";
 import DefaultPicture from "../../assets/profile.png";
 import Card from "../../components/Card/Card";
 import styled from "styled-components";
 import colors from "../../utils/style/color";
-
-const freelanceProfiles = [
-  {
-    name: "Jane Doe",
-    jobTitle: "Devops",
-    picture: DefaultPicture,
-  },
-  {
-    name: "John Doe",
-    jobTitle: "Developpeur frontend",
-    picture: DefaultPicture,
-  },
-  {
-    name: "Jeanne Biche",
-    jobTitle: "Développeuse Fullstack",
-    picture: DefaultPicture,
-  },
-];
+import Loader from "../../utils/Atoms";
 
 const CardsContainer = styled.div`
   display: grid;
@@ -46,25 +29,56 @@ const PageSubtitle = styled.h2`
   color: ${colors.secondary};
 `;
 
+const LoaderWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 const Freelances = () => {
+  const [freelanceProfiles, setFreelanceProfiles] = useState([]);
+  const [isDataLoading, setIsDataLoading] = useState(false);
+
+  async function fetchData() {
+    try {
+      setIsDataLoading(true);
+      const response = await fetch("http://localhost:8000/freelances");
+      const { freelancersList } = await response.json();
+      console.log(freelancersList);
+      setFreelanceProfiles(freelancersList);
+      setIsDataLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <div>
       <PageTitle>Trouvez votre prestataire</PageTitle>
       <PageSubtitle>
         Chez Shiny nous réunissons les meilleurs profils pour vous.
       </PageSubtitle>
-      <CardsContainer>
-        {freelanceProfiles.map((profile, index) => {
-          return (
-            <Card
-              key={`${profile.name}-${index}`}
-              label={profile.name}
-              title={profile.jobTitle}
-              picture={profile.picture}
-            />
-          );
-        })}
-      </CardsContainer>
+      {isDataLoading ? (
+        <LoaderWrapper>
+          <Loader />
+        </LoaderWrapper>
+      ) : (
+        <CardsContainer>
+          {freelanceProfiles.map((profile) => {
+            return (
+              <Card
+                key={`${profile.id}`}
+                label={profile.name}
+                title={profile.job}
+                picture={profile.picture}
+              />
+            );
+          })}
+        </CardsContainer>
+      )}
     </div>
   );
 };
