@@ -2,12 +2,14 @@ import { React, useState, useEffect } from "react";
 import styled from "styled-components";
 import colors from "../../utils/style/color";
 import { useParams, Link } from "react-router-dom";
+import Loader from "../../utils/Atoms";
 
 const Survey = () => {
   let { questionNumber } = useParams();
   const questionNumberInt = parseInt(questionNumber);
 
   const [surveyData, setSurveyData] = useState({});
+  const [isDataLoading, setIsDataLoading] = useState(false);
 
   const SurveyContainer = styled.div`
     display: flex;
@@ -36,9 +38,11 @@ const Survey = () => {
 
   async function fetchData() {
     try {
+      setIsDataLoading(true);
       const response = await fetch("http://localhost:8000/survey");
       const data = await response.json();
       setSurveyData(data.surveyData);
+      setIsDataLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -51,7 +55,12 @@ const Survey = () => {
   return (
     <SurveyContainer>
       <QuestionTitle>Question {questionNumber}</QuestionTitle>
-      <QuestionContent>{surveyData[questionNumber]}</QuestionContent>
+      {isDataLoading ? (
+        <Loader />
+      ) : (
+        <QuestionContent>{surveyData[questionNumber]}</QuestionContent>
+      )}
+
       <LinkWrapper>
         {questionNumberInt > 1 && (
           <Link to={`/survey/${questionNumberInt - 1}`}>Précédent</Link>
