@@ -1,4 +1,5 @@
-import React from "react";
+import { React, useContext } from "react";
+import { ThemeContext } from "../../utils/context";
 import styled from "styled-components";
 import colors from "../../utils/style/color";
 
@@ -17,9 +18,12 @@ const NightModeButton = styled.button`
 `;
 
 const Footer = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
   return (
     <FooterContainer>
-      <NightModeButton>Changer de mode</NightModeButton>
+      <NightModeButton onClick={() => toggleTheme()}>
+        Changer de mode : {theme === "light" ? "🌙" : "☀️"}
+      </NightModeButton>
     </FooterContainer>
   );
 };
