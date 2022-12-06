@@ -8,22 +8,24 @@ import Results from "./pages/Results/Results";
 import Freelances from "./pages/Freelances/Freelances";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalStyle from "./utils/style/GlobalStyle";
-import { ThemeProvider } from "./utils/context";
+import { ThemeProvider, SurveyProvider } from "./utils/context";
 
 function App() {
   return (
     <BrowserRouter>
       <ThemeProvider>
-        <GlobalStyle />
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/survey/:questionNumber" element={<Survey />}></Route>
-          <Route path="/survey/results" element={<Results />}></Route>
-          <Route path="/freelances" element={<Freelances />}></Route>
-          <Route path="*" element={<Error />}></Route>
-        </Routes>
-        <Footer />
+        <SurveyProvider>
+          <GlobalStyle />
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/survey/:questionNumber" element={<Survey />}></Route>
+            <Route path="/survey/results" element={<Results />}></Route>
+            <Route path="/freelances" element={<Freelances />}></Route>
+            <Route path="*" element={<Error />}></Route>
+          </Routes>
+          <Footer />
+        </SurveyProvider>
       </ThemeProvider>
     </BrowserRouter>
   );
