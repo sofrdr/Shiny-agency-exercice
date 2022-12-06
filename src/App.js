@@ -2,6 +2,7 @@ import "./App.css";
 import Home from "./pages/Home/Home";
 import Survey from "./pages/Survey/Survey";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 import Error from "./components/Error/Error";
 import Results from "./pages/Results/Results";
 import Freelances from "./pages/Freelances/Freelances";
@@ -26,6 +27,7 @@ function App() {
         <Route path="/freelances" element={<Freelances />}></Route>
         <Route path="*" element={<Error />}></Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
