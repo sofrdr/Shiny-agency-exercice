@@ -8,6 +8,7 @@ import Results from "./pages/Results/Results";
 import Freelances from "./pages/Freelances/Freelances";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
+import { ThemeProvider } from "./utils/context";
 
 const GlobalStyle = createGlobalStyle`
 div{
@@ -18,16 +19,18 @@ div{
 function App() {
   return (
     <BrowserRouter>
-      <GlobalStyle />
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/survey/:questionNumber" element={<Survey />}></Route>
-        <Route path="/survey/results" element={<Results />}></Route>
-        <Route path="/freelances" element={<Freelances />}></Route>
-        <Route path="*" element={<Error />}></Route>
-      </Routes>
-      <Footer />
+      <ThemeProvider>
+        <GlobalStyle />
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/survey/:questionNumber" element={<Survey />}></Route>
+          <Route path="/survey/results" element={<Results />}></Route>
+          <Route path="/freelances" element={<Freelances />}></Route>
+          <Route path="*" element={<Error />}></Route>
+        </Routes>
+        <Footer />
+      </ThemeProvider>
     </BrowserRouter>
   );
 }
