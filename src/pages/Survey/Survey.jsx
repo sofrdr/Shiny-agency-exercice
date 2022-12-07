@@ -56,18 +56,26 @@ const ReplyWrapper = styled.div`
   flex-direction: row;
 `;
 
+const StyledError = styled.div`
+  text-align: center;
+  font-size: 20px;
+`;
+
 const Survey = () => {
   let { questionNumber } = useParams();
   const questionNumberInt = parseInt(questionNumber);
 
   const { answers, saveAnswers } = useContext(SurveyContext);
-  const { data, isLoading } = useFetch("http://localhost:8000/survey");
+  const { data, isLoading, error } = useFetch("http://localhost:8000/survey");
   const { surveyData } = data;
 
   function saveReply(answer) {
     saveAnswers({ [questionNumber]: answer });
   }
 
+  if (error) {
+    return <StyledError>Il y a eu un problème</StyledError>;
+  }
   return (
     <SurveyContainer>
       <QuestionTitle>Question {questionNumber}</QuestionTitle>

@@ -34,10 +34,20 @@ const LoaderWrapper = styled.div`
   justify-content: center;
 `;
 
+const StyledError = styled.div`
+  text-align: center;
+  font-size: 20px;
+`;
+
 const Freelances = () => {
-  const { data, isLoading } = useFetch("http://localhost:8000/freelances");
+  const { data, isLoading, error } = useFetch(
+    "http://localhost:8000/freelances"
+  );
   const { freelancersList } = data;
 
+  if (error) {
+    return <StyledError>Il y a eu un problème</StyledError>;
+  }
   return (
     <div>
       <PageTitle>Trouvez votre prestataire</PageTitle>

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export const useFetch = (url) => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -13,6 +14,7 @@ export const useFetch = (url) => {
       setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setError(true);
     }
   };
 
@@ -22,5 +24,5 @@ export const useFetch = (url) => {
     // eslint-disable-next-line
   }, [url]);
 
-  return { isLoading, data };
+  return { isLoading, data, error };
 };
